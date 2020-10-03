@@ -7,10 +7,13 @@ from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
+from django.db import OperationalError
 
-
-for user in User.objects.all():
-    Token.objects.get_or_create(user=user)
+try:   
+    for user in User.objects.all():
+        Token.objects.get_or_create(user=user)
+except OperationalError: 
+    pass
 
 class listViewSet(viewsets.ModelViewSet):
         '''

@@ -9,7 +9,7 @@ class Member(models.Model):
     profession = models.CharField('profession', default="Noprof", max_length=50)
     languages = models.CharField('Known Languages', default="NoLang", max_length=50)
     political_force = models.CharField('Political Force', max_length=50)
-    email = models.EmailField('email', unique=True, max_length=50)
+    email = models.EmailField('email', blank=False, unique=True, max_length=50)
     
     def __str__(self):
         return self.name

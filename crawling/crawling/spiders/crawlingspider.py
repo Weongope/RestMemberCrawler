@@ -19,7 +19,7 @@ class CrawlingSpider(scrapy.Spider):
             yield scrapy.Request(url, callback = self.parse_minister)
     
     def parse_minister(self, response):
-        persons = CrawlingItem()
+        person = CrawlingItem()
         separator = " " 
 
         main_information = response.css(".MPinfo li")       
@@ -48,16 +48,16 @@ class CrawlingSpider(scrapy.Spider):
             if "E-mail" in str(info):
                 email = info.css("::text")[1].get()
         
-        persons["name"] = name
-        persons["birth_date"] = birth_date
-        persons["birth_place"] = birth_place
-        persons["profession"] = profession
-        persons["languages"] = languages
-        persons["political_force"] = political_force
-        persons["email"] = email
+        person["name"] = name
+        person["birth_date"] = birth_date
+        person["birth_place"] = birth_place
+        person["profession"] = profession
+        person["languages"] = languages
+        person["political_force"] = political_force
+        person["email"] = email
         
         with open('crawling\schemas.json') as json_file:
             data = json.load(json_file)
         
-        jsonschema.validate(dict(persons), data)
-        return persons        
+        jsonschema.validate(dict(person), data)
+        return person       

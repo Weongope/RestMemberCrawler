@@ -1,6 +1,7 @@
 from itemadapter import ItemAdapter
 from restmember.models import Member
 import jsonschema
+from django.db import IntegrityError
 
 from rest_framework.exceptions import ParseError
 
@@ -15,7 +16,8 @@ class CrawlingPipeline:
         political_force = item['political_force'] 
         email = item['email'] 
 
-        Member.objects.create(
+        try:   
+            Member.objects.create(
             name = name,
             birth_date = birth_date,
             birth_place = birth_place,
@@ -24,5 +26,7 @@ class CrawlingPipeline:
             political_force = political_force,
             email = email,
         )
+        except IntegrityError: 
+            pass
  
         return item
