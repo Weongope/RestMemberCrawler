@@ -1,0 +1,12 @@
+{
+    "type": "object",
+    "properties": {   
+        "name": { "type": "string" },
+        "birth_date": { "type": "string" },       
+        "birth_place": { "type": "string" },
+        "profession": { "type": "string" },
+        "languages": { "type": "string" },
+        "political_force": { "type": "string" },
+        "email": { "type": "string" }  
+    }
+}
